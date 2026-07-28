@@ -1,0 +1,23 @@
+# ── お客さんの情報が入るファイルは、GitHub に上げません ──
+# 名簿・売上などのファイルは、星野さんのパソコンの中だけに置きます。
+# ここに書いてあるものは、うっかり操作しても GitHub に送られません。
+
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+*.tsv
+*.numbers
+*.db
+*.sqlite
+*.sqlite3
+
+# 作業中に生まれるもの
+data/
+raw/
+private/
+出力/
+
+# Mac / Windows が勝手に作るもの
+.DS_Store
+Thumbs.db
