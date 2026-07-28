@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>はじめに — 作業場の開きかた</title>
 
 <style>
@@ -67,15 +72,15 @@ h1{font-size:1.95rem; line-height:1.5; font-weight:700; margin:0 0 1.4rem; lette
 }
 .today h2{font-size:.82rem; letter-spacing:.1em; color:var(--muted); margin:0 0 .3rem; font-weight:700}
 .today .hint{font-size:.8rem; color:var(--muted); margin:0 0 .8rem; line-height:1.7}
-.today ol{margin:0; padding:0; list-style:none; counter-reset:t}
+.today ol{margin:0; padding:0; list-style:none}
 .today li{
-  counter-increment:t; display:grid; grid-template-columns:1.1rem 1.4rem 1fr auto; gap:0 .6rem;
+  display:grid; grid-template-columns:1.1rem 2.2rem 1fr auto; gap:0 .6rem;
   padding:.55rem 0; border-bottom:1px dashed var(--rule); align-items:center; font-size:.96rem;
 }
 .today li:last-child{border-bottom:0}
-.today li::before{
-  content:counter(t); font-family:var(--mono); font-size:.85rem; color:var(--go); font-weight:700;
-  grid-column:2; grid-row:1;
+.today .sn{
+  font-family:var(--mono); font-size:.8rem; color:var(--go); font-weight:700;
+  grid-column:2; grid-row:1; white-space:nowrap;
 }
 .today input[type="checkbox"]{
   grid-column:1; grid-row:1; width:1.05rem; height:1.05rem; margin:0;
@@ -84,7 +89,16 @@ h1{font-size:1.95rem; line-height:1.5; font-weight:700; margin:0 0 1.4rem; lette
 .today label{cursor:pointer; grid-column:3; grid-row:1; line-height:1.7}
 .today .mins{grid-column:4; grid-row:1; font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums}
 .today li.done label{color:var(--muted); text-decoration:line-through; text-decoration-thickness:1px}
-.today li.done::before{opacity:.45}
+.today li.done .sn{opacity:.45}
+
+/* 中立の説明箱（警告ではない） */
+.info{
+  background:var(--sunk); border:1px solid var(--rule);
+  padding:.95rem 1.2rem; border-radius:5px; margin:0 0 1.2rem;
+}
+.info strong{display:block; font-size:.8rem; letter-spacing:.06em; color:var(--muted); margin:0 0 .3rem}
+.info p{margin:0 0 .5rem; font-size:.93rem; line-height:1.85; color:var(--ink-2)}
+.info p:last-child{margin-bottom:0}
 
 /* ── steps ────────────────────────── */
 .step{margin:0 0 3.6rem}
@@ -195,10 +209,12 @@ details .body ul{padding-left:1.2rem; margin:0 0 .7rem}
 }
 .fill p{margin:0; font-size:.93rem; color:var(--ink-2); line-height:1.85}
 .fill .slot{
-  display:block; margin-top:.6rem; font-family:var(--mono); font-size:.85rem;
-  color:var(--muted); background:var(--card); border:1px solid var(--rule);
-  border-radius:4px; padding:.55rem .8rem;
+  display:block; width:100%; margin-top:.7rem;
+  font-family:inherit; font-size:.92rem; color:var(--ink);
+  background:var(--card); border:1px solid var(--rule-2);
+  border-radius:4px; padding:.6rem .8rem;
 }
+.fill .slot::placeholder{color:var(--muted)}
 
 /* ── safety ───────────────────────── */
 .safe{
@@ -235,6 +251,8 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
   .today .mins{font-size:.76rem}
 }
 </style>
+</head>
+<body>
 
 <div class="wrap">
 
@@ -246,14 +264,17 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
 </header>
 
 <div class="today">
-  <h2>今日やること</h2>
-  <p class="hint">終わったら印を付けてください。このページを閉じても残ります。</p>
+  <h2>今日やること — 全部で25分ほど</h2>
+  <p class="hint">終わったら印を付けてください。このページを閉じても残ります。<br>途中でやめて大丈夫です。次に開いたとき、印を見れば続きが分かります。</p>
   <ol>
-    <li><input type="checkbox" id="t1"><label for="t1">Claude Code を入れる</label><span class="mins">10分</span></li>
-    <li><input type="checkbox" id="t2"><label for="t2">作業場を受け取る</label><span class="mins">10分</span></li>
-    <li><input type="checkbox" id="t3"><label for="t3">作業場を開く</label><span class="mins">2分</span></li>
-    <li><input type="checkbox" id="t4"><label for="t4">話しかける</label><span class="mins">1分</span></li>
+    <li><input type="checkbox" id="t1"><span class="sn">1</span><label for="t1">Claude Code を入れる</label><span class="mins">10分</span></li>
+    <li><input type="checkbox" id="t2"><span class="sn">2-①</span><label for="t2">招待のメールを承諾する</label><span class="mins">2分</span></li>
+    <li><input type="checkbox" id="t3"><span class="sn">2-②</span><label for="t3">GitHub Desktop を入れる</label><span class="mins">7分</span></li>
+    <li><input type="checkbox" id="t4"><span class="sn">2-③</span><label for="t4">作業場を手元に持ってくる</label><span class="mins">3分</span></li>
+    <li><input type="checkbox" id="t5"><span class="sn">3</span><label for="t5">作業場を開く</label><span class="mins">2分</span></li>
+    <li><input type="checkbox" id="t6"><span class="sn">4</span><label for="t6">話しかける</label><span class="mins">1分</span></li>
   </ol>
+  <p class="hint" style="margin:.9rem 0 0">どこかで詰まると、これより時間がかかります。<b>その日のうちに終わらなくて構いません。</b></p>
 </div>
 
 <!-- ══════ STEP 1 ══════ -->
@@ -282,6 +303,10 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
       <li>Claude を起動して、いつものアカウントで<b>サインイン</b>します</li>
       <li>画面の上のほうにある <b>Code</b> を押します</li>
     </ol>
+    <div class="info">
+      <strong>初回だけ、確認が出ることがあります</strong>
+      <p>「"Claude"はインターネットからダウンロードされたアプリケーションです。開いてもよろしいですか？」——<b>「開く」で進めてください。</b>Mac が初めて開くアプリに毎回出す確認です。</p>
+    </div>
   </div>
 
   <div class="osblock" data-os="win" hidden>
@@ -299,6 +324,10 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
       <li>Claude を起動して、いつものアカウントで<b>サインイン</b>します</li>
       <li>画面の上のほうにある <b>Code</b> を押します</li>
     </ol>
+    <div class="info">
+      <strong>初回だけ、青い画面が出ることがあります</strong>
+      <p>「Windows によって PC が保護されました」と出たら、<b>「詳細情報」を押してから「実行」</b>を選んでください。Windows が初めて見るアプリに毎回出す確認です。</p>
+    </div>
     <div class="care">
       <strong>Windows だけ、もうひとつ必要です</strong>
       <p>初めて <b>Code</b> を押したとき、「Git for Windows が必要です」という案内が出ることがあります。出たら、案内に従って入れてください。<b>入れたあと Claude を一度閉じて、開き直します。</b></p>
@@ -324,6 +353,10 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
 <section class="step">
   <div class="step-no"><span>2</span><em>10分</em></div>
   <h2 class="st">作業場を受け取る</h2>
+  <div class="ok">
+    <strong>このページを、お手元のフォルダの中から開いている方へ</strong>
+    <p><b>この段は、もう済んでいます。</b>フォルダが手元にあるからこのページが開けています。印を3つ付けて、ステップ3へ進んでください。</p>
+  </div>
   <p>作業場は<b>フォルダひとつ</b>です。GitHub というサービスに置いてあるので、そこから星野さんのパソコンに持ってきます。<b>ここが今日いちばん手数が多いところです。</b>3つに分かれます。</p>
 
   <h3 class="substep">① 招待のメールを承諾する</h3>
@@ -336,18 +369,28 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
   <h3 class="substep">② GitHub Desktop を入れる</h3>
   <p>ファイルを持ってくるためのアプリです。<b>これも普通のアプリとして入ります。</b></p>
   <a class="dl" href="https://desktop.github.com/download/">GitHub Desktop をダウンロード</a>
-  <div class="care">
-    <strong>Mac の方は、2種類あります</strong>
+  <div class="care" data-os="mac">
+    <strong>Mac は、2種類から選びます</strong>
     <p><b>Apple silicon</b> と <b>Intel chip</b> のどちらかを選びます。分からないときは、画面左上のリンゴマーク →「この Mac について」で確認できます。<b>近年の Mac はほとんど Apple silicon です。</b></p>
-    <p>Windows の方は「Download for Windows (64bit)」を選んでください。</p>
   </div>
-  <p>入れたら起動して、<b>さきほど承諾したときの GitHub アカウントでサインイン</b>します。</p>
+  <div class="info" data-os="win" hidden>
+    <strong>Windows は1つだけです</strong>
+    <p>「Download for Windows (64bit)」を選んでください。</p>
+  </div>
+  <p>入れたら起動して、<b>さきほど承諾したときの GitHub アカウントでサインイン</b>します。ブラウザが開いて、承認するとアプリに戻ってきます。</p>
+  <details>
+    <summary>「Signing in…」のまま戻ってこない</summary>
+    <div class="body">
+      <p>ブラウザで承認したのに、GitHub Desktop が「Signing in…」の表示のまま止まることがあります（Windows で報告されている不具合です）。</p>
+      <p><b>GitHub Desktop をいったん閉じて、開き直してください。</b>たいていはこれでサインイン済みになっています。それでも駄目なら、登阪さんにご連絡ください。</p>
+    </div>
+  </details>
 
   <h3 class="substep">③ 作業場を手元に持ってくる</h3>
   <p>GitHub Desktop で <b>Clone a repository</b>（リポジトリをクローン）を選ぶと、星野さんが招待されている作業場が一覧に出ます。それを選んで、<b>保存する場所</b>を決めて、<b>Clone</b> を押します。</p>
-  <div class="care">
-    <strong>保存する場所は、あとで自分で見つけられる所に</strong>
-    <p>書類フォルダの中など、分かりやすい場所にしてください。ここを覚えておくと、次の手順が楽です。</p>
+  <div class="fill">
+    <p><b>保存した場所を、ここに書いておけます。</b>書類フォルダの中など、あとで自分で見つけられる所にしてください。次の手順で使います。</p>
+    <input type="text" id="savepath" class="slot" placeholder="例）書類フォルダの中">
   </div>
   <div class="ok">
     <strong>こう見えたら成功です</strong>
@@ -361,6 +404,15 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
       <p>それでも見つからないときは、登阪さんにご連絡ください。送り先のメールアドレスを確認して、送り直します。</p>
     </div>
   </details>
+
+  <details>
+    <summary>一覧に作業場が出てこない</summary>
+    <div class="body">
+      <p>いちばん多いのは、<b>①の招待をまだ承諾していない</b>場合です。メールに戻って承諾してから、GitHub Desktop の一覧を更新してください。</p>
+      <p>次に多いのは、<b>GitHub Desktop にサインインしたアカウントが、招待を受けたアカウントと違う</b>場合です。招待メールが届いたアドレスと、サインインしているアカウントが同じか確認してください。</p>
+      <p>それでも出てこないときは、登阪さんにご連絡ください。</p>
+    </div>
+  </details>
 </section>
 
 <!-- ══════ STEP 3 ══════ -->
@@ -369,11 +421,16 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
   <h2 class="st">作業場を開く</h2>
   <p>Claude に「このフォルダで作業して」と教えます。</p>
 
-  <p>Claude の <b>Code</b> の画面で <b>Select folder</b>（フォルダを選ぶ）を押して、<b>さきほど保存したフォルダ</b>を選びます。</p>
+  <p>Claude の <b>Code</b> の画面で、順にこう進みます。</p>
+  <ol>
+    <li><b>どこで動かすかを選びます。「Local」</b>を選んでください。星野さんのパソコンの中だけで動かす、という意味です</li>
+    <li><b>Select folder</b>（フォルダを選ぶ）を押して、<b>さきほど保存したフォルダ</b>を選びます</li>
+    <li>使う AI の種類を選ぶ画面が出たら、<b>そのままで結構です</b>。あとから変えられます</li>
+  </ol>
 
   <div class="care">
     <strong>「このフォルダを信頼しますか」と聞かれます</strong>
-    <p>初めて開くフォルダでは、必ずこの確認が出ます。<b>信頼する（はい）を選んでください。</b>登阪さんが用意したフォルダです。</p>
+    <p>初めて開くフォルダでは、この確認が出ます。<b>信頼する（はい）を選んでください。</b>登阪さんが用意したフォルダです。</p>
   </div>
 
   <div class="ok">
@@ -406,33 +463,51 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
     <p>Claude が名乗って、<b>登阪さんから伺っている内容が合っているかどうか</b>を聞いてきます。違っていたら、遠慮なく違うと言ってください。そこから直します。</p>
   </div>
 
-  <div class="care">
+  <div class="info">
     <strong>何度も「これをしていいですか」と聞かれます</strong>
     <p>Claude がファイルを読んだり書いたりするたびに、確認が出ます。<b>うるさく感じますが、これは安全のための仕組みです。</b>勝手に何かが起きないようになっています。</p>
     <p>最初のうちは、出てきたら「はい」で進めて構いません。慣れてきたら、まとめて許可する設定に変えられます。</p>
   </div>
 
-  <p>このあとは、<b>いま何があるかを6問ほど伺います。</b>5分ほどです。分からないものは「分からない」で大丈夫です。それが済んだら、何をどの順番で作るかをまとめた紙をお見せして、そこから実際に作りはじめます。</p>
+  <div class="ok">
+    <strong>もし名乗らなかったら</strong>
+    <p>Claude が引き継ぎ内容の話をせず、普通に返事をしただけなら、<b>選んだフォルダが違っています。</b>ひとつ前の手順に戻って、作業場のフォルダを選び直してください。</p>
+  </div>
+
+  <p>このあとは、<b>まず3つだけ伺います。</b>そのあと、スプレッドシートを1つ見せていただいて、実物を見ながら進めます。分からないものは「分からない」で大丈夫です。</p>
 </section>
 
 <hr class="sep">
 
 <!-- ══════ SAFETY ══════ -->
 <section class="safe">
-  <h2>安心していただきたいこと</h2>
+  <h2>知っておいていただきたいこと</h2>
   <ul>
-    <li><b>壊しても、元に戻せます。</b>この作業場は変更の履歴を全部持っています。「さっきの状態に戻して」と言えば戻ります。星野さんが操作を覚える必要はありません</li>
-    <li><b>スプレッドシートの原本には手を加えません。</b>読むだけです。作ったものが気に入らなければ、捨ててやり直せます</li>
-    <li><b>お客さんの情報は、星野さんのパソコンに置いたまま扱います。</b>置き場所は星野さんが決めます</li>
     <li><b>今日、名簿は1件も要りません。</b>まず道具を入れて、話をするところまでです</li>
-    <li><b>途中でやめて大丈夫です。</b>次に開いたとき、続きから再開できます</li>
-    <li><b>分からなくなったら、このページに戻ってきてください。</b>作業場のフォルダの中に、いつでも入っています</li>
+    <li><b>作ったものは、元に戻せます。</b>この作業場は変更の履歴を持っています。「さっきの状態に戻して」と言えば戻ります。星野さんが操作を覚える必要はありません</li>
+    <li><b>ただし、スプレッドシートの原本は履歴に入りません。</b>GitHub に上げない設定にしてあるためです。<b>原本は、別の場所にもコピーを取っておいてください。</b>ここだけは元に戻せません</li>
+    <li><b>原本には書き込みません。</b>読むだけです。加工したものは別のファイルに作ります</li>
+    <li><b>Claude が読んだ内容は、Claude のサービス（Anthropic 社）に送られて処理されます。</b>いま星野さんがお使いの AI と同じ仕組みです。お客さんの情報をどこまで読ませるかは、進めながらご相談します</li>
+    <li><b>ファイルそのものは、星野さんのパソコンに置いたまま扱います。</b>GitHub には上がりません</li>
+    <li><b>途中でやめて大丈夫です。</b>上の「今日やること」に印を付けておけば、次に開いたとき続きが分かります</li>
   </ul>
 </section>
 
+<hr class="sep">
+
+<section class="step">
+  <h2 class="st">次に開いたとき</h2>
+  <p>作業場のフォルダの中の <code>はじめに.html</code> を、いつでもダブルクリックで開けます。<b>このページは消さないでください。</b></p>
+  <p>2日目以降にやることは、Claude が案内します。何を打っても始まります——<b>「続きから」</b>とだけ打っていただければ、前回の続きを見つけて再開します。</p>
+  <div class="info">
+    <strong>いま何が決まっているかを見たいとき</strong>
+    <p>同じフォルダの中の <code>わかったこと.md</code> に、伺った内容が溜まっていきます。<code>計画.html</code> はダブルクリックで開けます。<b>どちらも、まだ何も決まっていないうちは空欄だらけです。</b>それが正常です。</p>
+  </div>
+</section>
+
 <p class="foot">
-  うまくいかないときは、<b>画面に出ている文をそのまま登阪さんに送ってください。</b>それだけで、たいてい原因が分かります。<br>
-  この作業場は登阪さんが用意したものです。中身について気になることがあれば、フォルダの中の <span style="font-family:var(--mono)">引き継ぎ.md</span> に、何が引き継がれているかが書いてあります。
+  うまくいかないときは、<b>画面に出ている文をそのまま、いつもの連絡先で登阪さんに送ってください。</b>それだけで、たいてい原因が分かります。うまく説明しようとしなくて結構です。<br>
+  この作業場は登阪さんが用意したものです。中身について気になることがあれば、フォルダの中の <code>引き継ぎ.md</code> に、何が引き継がれているかが書いてあります。
 </p>
 
 </div>
@@ -440,7 +515,7 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
 <script>
 (function(){
   var btns = document.querySelectorAll('.os button');
-  var blocks = document.querySelectorAll('.osblock');
+  var blocks = document.querySelectorAll('[data-os]:not(button)');
   function pick(os){
     btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.os === os)); });
     blocks.forEach(function(bl){ bl.hidden = (bl.dataset.os !== os); });
@@ -465,6 +540,15 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
     });
   });
 
+  // 保存した場所のメモ
+  var sp = document.getElementById('savepath');
+  if(sp){
+    try{ sp.value = localStorage.getItem('hg-savepath') || ''; }catch(e){}
+    sp.addEventListener('input', function(){
+      try{ localStorage.setItem('hg-savepath', sp.value); }catch(e){}
+    });
+  }
+
   var c = document.getElementById('copy');
   if(c){
     c.addEventListener('click', function(){
@@ -482,3 +566,5 @@ hr.sep{border:0; border-top:1px solid var(--rule); margin:.4rem 0 2.8rem}
   }
 })();
 </script>
+</body>
+</html>

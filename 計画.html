@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>計画 — いま決まっていること、まだ決まっていないこと</title>
+
+<!--
+  ══════════════════════════════════════════════════════════════
+  Claudeへ
+
+  この雛形を埋めるときの決まりごと。
+
+  1. 伺っていないことは、絶対に埋めないでください。
+     class="mada" の要素（「まだ伺っていません」の札）を、そのまま残します。
+     架空の期間・区分・件数・機能名・製品名で埋めないこと。
+
+  2. 空欄が並んでいる紙は、不格好ですが正しい紙です。
+     星野さんは、ここに書いてある表を「決まったこと」として読みます。
+     埋まっていない紙より、間違った数字が入った紙のほうが、はるかに害があります。
+
+  3. お客さんの氏名・電話番号・住所・個別の金額を、ここに書かないでください。
+     このファイルは GitHub に上がります。
+
+  4. 更新したら、星野さんに開き方を伝えてください。
+     「作業場のフォルダの中の 計画.html をダブルクリックで開けます」
+     「見てください」だけでは、星野さんの画面には何も出ません。
+  ══════════════════════════════════════════════════════════════
+-->
+
+<style>
+:root{
+  --paper:#F7F6F3; --card:#FFFFFF; --sunk:#EFEEE9;
+  --ink:#1F2320; --ink-2:#4C524B; --muted:#666B64;
+  --rule:#E2E0DA; --rule-2:#CFCCC3;
+  --go:#1F5C4B; --go-soft:#E2EDE8; --on-go:#FFFFFF;
+  --mada:#8A5A1E; --mada-soft:#F6EEDF;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+  --mono:"SF Mono",Menlo,Consolas,ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#161814; --card:#1D201B; --sunk:#212520;
+  --ink:#E8E9E4; --ink-2:#B2B7AE; --muted:#8A9086;
+  --rule:#2E322C; --rule-2:#414639;
+  --go:#6FB89C; --go-soft:#1B2A25; --on-go:#0F1A16;
+  --mada:#C79A52; --mada-soft:#2A2318;
+}}
+:root[data-theme="dark"]{
+  --paper:#161814; --card:#1D201B; --sunk:#212520;
+  --ink:#E8E9E4; --ink-2:#B2B7AE; --muted:#8A9086;
+  --rule:#2E322C; --rule-2:#414639;
+  --go:#6FB89C; --go-soft:#1B2A25; --on-go:#0F1A16;
+  --mada:#C79A52; --mada-soft:#2A2318;
+}
+:root[data-theme="light"]{
+  --paper:#F7F6F3; --card:#FFFFFF; --sunk:#EFEEE9;
+  --ink:#1F2320; --ink-2:#4C524B; --muted:#666B64;
+  --rule:#E2E0DA; --rule-2:#CFCCC3;
+  --go:#1F5C4B; --go-soft:#E2EDE8; --on-go:#FFFFFF;
+  --mada:#8A5A1E; --mada-soft:#F6EEDF;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.9;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2.5px solid var(--go);outline-offset:3px}
+.wrap{max-width:38rem;margin:0 auto;padding:0 1.5rem 6rem}
+header{padding:4rem 0 2rem;border-bottom:1px solid var(--rule)}
+.kicker{font-size:.78rem;letter-spacing:.14em;color:var(--go);font-weight:700;margin:0 0 .8rem}
+h1{font-size:1.8rem;line-height:1.5;font-weight:700;margin:0 0 1rem}
+header p{margin:0;color:var(--ink-2);font-size:.98rem}
+.upd{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:1rem 0 0}
+section{padding:2.8rem 0 0}
+h2{font-size:1.22rem;font-weight:700;margin:0 0 .4rem;line-height:1.5}
+.lead{font-size:.86rem;color:var(--muted);margin:0 0 1.1rem;line-height:1.75}
+p{margin:0 0 1.1rem;color:var(--ink-2)}
+ul.list{list-style:none;padding:0;margin:0}
+ul.list li{padding:.75rem 0;border-bottom:1px solid var(--rule);line-height:1.85}
+ul.list li:last-child{border-bottom:0}
+.who{font-size:.78rem;color:var(--muted);margin-left:.5em;white-space:nowrap}
+.mada{
+  display:inline-block;background:var(--mada-soft);color:var(--mada);
+  border:1px dashed var(--mada);border-radius:3px;
+  font-size:.8rem;font-weight:700;padding:.15em .6em;
+}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1.3rem 1.5rem;margin:0 0 1.2rem}
+.box > :last-child{margin-bottom:0}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.steps li{
+  counter-increment:s;display:grid;grid-template-columns:1.9rem 1fr;gap:0 .8rem;
+  padding:.9rem 0;border-bottom:1px solid var(--rule);
+}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{
+  content:counter(s);font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--go);
+  border:1.5px solid var(--go);border-radius:50%;width:1.75rem;height:1.75rem;
+  display:grid;place-items:center;
+}
+.why{font-size:.86rem;color:var(--muted);margin:.35rem 0 0;line-height:1.75}
+.next{background:var(--go-soft);border-left:3px solid var(--go);padding:1.1rem 1.3rem;border-radius:0 5px 5px 0}
+.next strong{display:block;font-size:.8rem;letter-spacing:.06em;color:var(--go);margin:0 0 .35rem}
+.next p{margin:0;color:var(--ink-2)}
+.foot{margin-top:3.5rem;padding-top:1.4rem;border-top:1px solid var(--rule);
+  font-size:.85rem;line-height:1.9;color:var(--muted)}
+@media (max-width:600px){body{font-size:16px}.wrap{padding:0 1.15rem 4rem}header{padding:2.8rem 0 1.6rem}h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">星野さんの作業場</p>
+  <h1>いま決まっていること、<br>まだ決まっていないこと</h1>
+  <p>伺った内容から作りました。違うところがあれば、Claude に言えば直します。</p>
+  <p class="upd">最終更新：<span class="mada">まだ更新されていません</span></p>
+</header>
+
+<section>
+  <h2>伺ったこと</h2>
+  <p class="lead">星野さんの言葉のまま書いています。言い換えていません。</p>
+  <ul class="list">
+    <li><span class="mada">まだ伺っていません</span></li>
+  </ul>
+  <!-- Claudeへ: <li>内容<span class="who">星野さん・◯月◯日</span></li> の形で足す。
+       氏名・電話番号・住所・個別の金額は書かないこと。 -->
+</section>
+
+<section>
+  <h2>まだ分かっていないこと</h2>
+  <p class="lead">いま決めなくて大丈夫です。必要になったときに伺います。</p>
+  <ul class="list">
+    <li>教室の数 <span class="mada">まだ伺っていません</span></li>
+    <li>スプレッドシートの置き場所と形式 <span class="mada">まだ伺っていません</span></li>
+    <li>何が記録されているか <span class="mada">まだ伺っていません</span></li>
+    <li>日々入力しているのは誰か <span class="mada">まだ伺っていません</span></li>
+    <li>統合したあとスプレッドシートをどうするか <span class="mada">まだ伺っていません</span></li>
+    <li>会計処理のどこが手間か <span class="mada">まだ伺っていません</span></li>
+    <li>いちばん見たい数字 <span class="mada">まだ伺っていません</span></li>
+  </ul>
+  <!-- Claudeへ: 分かった項目は、この節から消して「伺ったこと」へ移す。
+       消さずに残っている札が、そのまま「まだ聞けていないこと」の一覧になる。 -->
+</section>
+
+<section>
+  <h2>作る順番</h2>
+  <p class="lead">なぜその順番なのかも書いています。順番を変えたいときは言ってください。</p>
+  <div class="box">
+    <p><span class="mada">まだ決まっていません</span></p>
+    <p style="margin-top:.8rem;font-size:.9rem">伺った内容がそろってから、ここに順番が入ります。<br>
+    先に決めてしまうと、星野さんの現場に合わないものを作ることになるので、いまは空にしてあります。</p>
+  </div>
+  <!-- Claudeへ: 決まったら上の .box を下の形に置き換える。
+  <ol class="steps">
+    <li>やること<p class="why">なぜ先にこれか（例：店舗ごとの売上を出すには、先に入金の記録が読めている必要があるため）</p></li>
+  </ol>
+  推測で順番を作らないこと。伺っていない機能を並べないこと。 -->
+</section>
+
+<section>
+  <h2>次にすること</h2>
+  <div class="next">
+    <strong>次の一手</strong>
+    <p><span class="mada">まだありません</span></p>
+  </div>
+  <!-- Claudeへ: 常に「1つだけ」書くこと。選択肢を並べない。
+       星野さんがやることなのか、Claudeがやることなのかを明記する。 -->
+</section>
+
+<p class="foot">
+  このページは、やりとりが進むたびに Claude が更新します。<br>
+  <span class="mada">まだ伺っていません</span> の札が付いているところは、まだ何も決まっていません。<br>
+  空欄が多いのは正常です。決まっていないことを決まったように書かないためです。
+</p>
+
+</div>
+</body>
+</html>
